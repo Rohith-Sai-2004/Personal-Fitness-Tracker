@@ -21,7 +21,7 @@ Click the link to launch the app instantly:
 4️ **Discover Similar Records** – Find other fitness profiles with comparable calorie burn values.  
 
 ---
-## 🛠️ Technologies Used
+##  Technologies Used
 * **Python** – (Pandas, Scikit-learn for data processing & modeling)
 *  **Streamlit** – (For interactive web-based UI)  
 * **Random Forest Regression** – (For calorie burn prediction)  
