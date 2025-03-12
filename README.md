@@ -15,10 +15,10 @@ Click the link to launch the app instantly:
 
 ---
 ##  How It Works
-1️ **Enter Your Details** – Provide your **Age, BMI, Gender** (session-based) and adjust daily varying inputs like **Heart Rate, Body Temperature, and Duration** using sliders.  
-2️ **Get Predictions** – The app instantly estimates the **calories burned** based on your input.  
-3️ **Compare Your Stats** – Analyze your results against other users' data.  
-4️ **Discover Similar Records** – Find other fitness profiles with comparable calorie burn values.  
+1️. **Enter Your Details** – Provide your **Age, BMI, Gender** (session-based) and adjust daily varying inputs like **Heart Rate, Body Temperature, and Duration** using sliders.  
+2️. **Get Predictions** – The app instantly estimates the **calories burned** based on your input.  
+3️.  **Compare Your Stats** – Analyze your results against other users' data.  
+4️. **Discover Similar Records** – Find other fitness profiles with comparable calorie burn values.  
 
 ---
 ##  Technologies Used
