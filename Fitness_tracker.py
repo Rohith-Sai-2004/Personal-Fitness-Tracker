@@ -8,7 +8,7 @@ import time
 import warnings
 warnings.filterwarnings('ignore')
 
-st.toast("Keep hard 🦾 "
+st.toast("Keep working hard 🦾 "
 "⏳")
 
 st.write("# Personal Fitness Tracker")
