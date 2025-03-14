@@ -25,7 +25,7 @@ Click the link to launch the app instantly:
 * **Python** – (Pandas, Scikit-learn for data processing & modeling)
 *  **Streamlit** – (For interactive web-based UI)  
 * **Random Forest Regression** – (For calorie burn prediction)  
-* **Matplotlib** – (Future data visualization features)  
+* **Plotly** – (data visualization features)  
 
 ---
 ##  Why This App?
