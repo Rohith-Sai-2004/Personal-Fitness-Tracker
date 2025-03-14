@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-import matplotlib.pyplot as plt
+import plotly.express as px
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error,r2_score
 from sklearn.ensemble import RandomForestRegressor
@@ -8,8 +8,23 @@ import time
 import warnings
 warnings.filterwarnings('ignore')
 
+st.toast("Keep hard 🦾 "
+"⏳")
+
 st.write("# Personal Fitness Tracker")
-st.write("**It is a personal fitness tracker used to track our fitness via workout comparisons among people. I have already inserted data from several individuals, so you can easily check where your standards are.**")
+with st.expander("About This WebApp"):
+    st.write("This Fitness tarcker is just a cheap model for those who can't afford much money on fitness bands and who were so enthusiastic to check out how much calories they've burned and many .")
+    st.header("Key Features :")
+    st.write("1. User input form ")
+    st.write("2. Machine Learning model (RandomForestRegressor)")
+    st.write("3. Plotly Scatter plot")
+    st.write("4. Fitness Insights")
+    st.write("5. Model Performance evaluations")
+with st.expander("How to use the WebApp"):
+    st.write("1. In the left side of page ,you will see a sidebar go for it")
+    st.write("2. In that Enter your Details")
+    st.write("3. Adjust your details according to you")
+    st.write("4. Go For It")
 st.sidebar.header("Enter your data")
 if "age" not in st.session_state:
     st.session_state.age = 25
@@ -24,7 +39,7 @@ def user_input_features():
     st.session_state.bmi = st.sidebar.number_input("Enter BMI", min_value=10.0, max_value=50.0, value=st.session_state.bmi)
     duration = st.sidebar.slider("Daily WorkOut Duration (min): ", 0, 30, 15)
     heart_rate = st.sidebar.slider("Heart Rate during Workout: ", 60, 130, 80)
-    body_temp = st.sidebar.slider("Body Temperature(C) during WorkOut : ", 36, 42, 38)
+    body_temp = st.sidebar.slider("Body Temperature(C) during WorkOut : ", 36, 42, 41)
     gender_encoded = 1 if st.session_state.gender == "Male" else 0
 
     data_model = {
@@ -39,14 +54,10 @@ def user_input_features():
     features = pd.DataFrame([data_model])
     return features
 df = user_input_features()
+    
 st.write("---")
-st.write("### Your Parameters :")
-latest_iteration = st.empty()
-bar = st.progress(0)
-for i in range(100):
-    bar.progress(i + 1)
-    time.sleep(0.01)
-st.write(df)
+with st.expander("Your Parameters"):
+    st.write(df)
 st.write("---")
 
 calories = pd.read_csv("calories.csv")
@@ -78,21 +89,26 @@ random_reg.fit(X_train, y_train)
 df = df.reindex(columns=X_train.columns, fill_value=0)
 prediction = random_reg.predict(df)
 
-st.write("### Workout Duration vs. Calories Burned")
-st.write("**This scatter plot had taken the data from the data sets and from you.**")
-st.write("**This plot had the attributes calories burned and duration of workout .We see that there is a point in red color that shows where we are among others.**")
-fig, ax = plt.subplots(facecolor='black')  
-ax.set_facecolor('#1e1e1e')
-ax.scatter(exercise_df["Duration"], exercise_df["Calories"], alpha=0.5, color='cyan', label="Other Users")
-ax.scatter(df["Duration"].values[0], prediction[0], color='red', marker='o', s=100, label="Your Data")  
-ax.set_xlabel("Workout Duration (min)", color='white')
-ax.set_ylabel("Calories Burned", color='white')
-ax.tick_params(axis='x', colors='white')
-ax.tick_params(axis='y', colors='white')
-legend = ax.legend()
-for text in legend.get_texts():
-    text.set_color("white")
-st.pyplot(fig)
+st.write("### Workout Duration vs Calories Burned")
+
+latest_iteration = st.empty()
+bar = st.progress(0)
+for i in range(100):
+    bar.progress(i + 1)
+    time.sleep(0.01)
+    
+fii = px.scatter(exercise_train_data , x = "Duration" , y = "Body_Temp" , size = "Calories")
+
+fii.update_layout(      
+    width=700,
+    height=450,
+)
+
+fii.add_scatter(
+    x=[df["Duration"].values[0]],y=[df["Body_Temp"].values[0]],
+    mode="markers+text",marker=dict(size=18,color="red",symbol="star"),name="Your Input",text=["You"],textposition="top center"
+)
+st.plotly_chart(fii)
 
 
 
@@ -145,14 +161,15 @@ rmse = mean_squared_error(y_test, y_pred) ** 0.5
 r2 = r2_score(y_test, y_pred)
 st.write(f"R² Score: {round(r2, 2)}")
 
-# Interpretation
 if r2 >= 0.9:
-    st.write("🚀 Excellent Model: This Model is very Good Model so that everyone will use it efficiently.")
+    st.write("Excellent Model: This Model is very Good Model so that everyone will use it efficiently.")
 elif r2 >= 0.75:
-    st.write("👍 Good Model: Explains a significant portion of the variance.")
+    st.write("Good Model: Explains a significant portion of the variance.")
 elif r2 >= 0.5:
-    st.write("⚠️ Average Model: Still usable but could be improved.")
+    st.write("Average Model: Still usable but could be improved.")
 elif r2 >= 0:
-    st.write("❌ Poor Model: Explains very little variance.")
+    st.write("Poor Model: Explains very little variance.")
 else:
-    st.write("❌ Very Bad Model: Worse than a random guess!")
+    st.write("Very Bad Model: Worse than a random guess!")
+
+st.write("# Thank You 💖")
