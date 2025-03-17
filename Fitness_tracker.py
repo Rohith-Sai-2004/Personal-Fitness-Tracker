@@ -171,4 +171,4 @@ elif r2 >= 0:
 else:
     st.write("Very Bad Model: Worse than a random guess!")
 
-st.write("# Thank You 💖")
+st.write("## Thank You 💖")
