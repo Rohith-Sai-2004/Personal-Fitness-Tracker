@@ -8,7 +8,7 @@ import time
 import warnings
 warnings.filterwarnings('ignore')
 
-st.toast("Keep working hard 🦾 ⏳")
+st.toast("Keep working hard")
 
 st.write("# Personal Fitness Tracker")
 with st.expander("About This WebApp"):
@@ -87,29 +87,6 @@ random_reg = RandomForestRegressor(n_estimators=1000, max_features=3, max_depth=
 random_reg.fit(X_train, y_train)
 df = df.reindex(columns=X_train.columns, fill_value=0)
 prediction = random_reg.predict(df)
-
-st.write("### Workout Duration vs Calories Burned")
-
-latest_iteration = st.empty()
-bar = st.progress(0)
-for i in range(100):
-    bar.progress(i + 1)
-    time.sleep(0.01)
-    
-fii = px.scatter(exercise_train_data , x = "Duration" , y = "Body_Temp" , size = "Calories")
-
-fii.update_layout(      
-    width=700,
-    height=450,
-)
-
-fii.add_scatter(
-    x=[df["Duration"].values[0]],y=[df["Body_Temp"].values[0]],
-    mode="markers+text",marker=dict(size=18,color="red",symbol="star"),name="Your Input",text=["You"],textposition="top center"
-)
-st.plotly_chart(fii)
-
-
 
 st.write("---")
 st.write("### Prediction: ")
