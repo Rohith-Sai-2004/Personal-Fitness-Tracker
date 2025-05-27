@@ -1,6 +1,5 @@
 import streamlit as st
 import pandas as pd
-import plotly.express as px
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_squared_error,r2_score
 from sklearn.ensemble import RandomForestRegressor
